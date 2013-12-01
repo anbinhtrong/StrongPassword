@@ -10,11 +10,15 @@ namespace StrongPassword
     {
         static void Main(string[] args)
         {
-            var rng = new RNGCryptoServiceProvider();
-            var salt = GenerateRandomSalt(rng, 16);
+            var salt = GenerateRandomSalt(CreateRandomNumber(), 16);
             var sha1 = ComputeSaltedHash("admin", salt);
             Console.WriteLine("Salt: " + salt);
             Console.WriteLine("Password: " + sha1);
+        }
+
+        public static RNGCryptoServiceProvider CreateRandomNumber()
+        {
+            return new RNGCryptoServiceProvider();
         }
 
         public static string GenerateRandomSalt(RNGCryptoServiceProvider rng, int size)
